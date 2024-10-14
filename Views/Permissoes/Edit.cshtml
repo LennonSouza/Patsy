@@ -1,0 +1,18 @@
+﻿@model Microsoft.AspNetCore.Identity.IdentityRole
+
+@{
+    ViewData["Title"] = "Editar Função";
+}
+
+<h1>Editar Função</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <div class="form-group">
+        <label for="roleName">Nome da Função</label>
+        <input type="text" class="form-control" name="roleName" value="@Model.Name" required />
+    </div>
+    <button type="submit" class="btn btn-warning">Atualizar</button>
+</form>
+
+<a asp-action="Index" class="btn btn-secondary">Voltar</a>

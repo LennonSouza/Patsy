@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+
+    var currentUser = await SignInManager.UserManager.GetUserAsync(User);
+    var currentUserLevel = currentUser?.HierarchyLevel; // Verifica se o usuário não é nulo
+
+    <form asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm" method="post" class="navbar-left">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-info" role="button" data-bs-toggle="dropdown">
+                Olá, <b>@User.Identity.Name.Split('@')[0]</b>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" style="text-align:center; background-color:#292929">
+                @if (currentUserLevel == 1 || currentUserLevel == 2 || currentUserLevel == 3)
+                {
+                    <a class="dropdown-item text-light" asp-area="" asp-controller="Usuario" asp-action="Usuarios">Usuarios</a>
+                    <a class="dropdown-item text-light" asp-area="" asp-controller="Permissoes" asp-action="Index">Gerenciar Funções</a>
+                }
+                @*  <li>
+            <a class="dropdown-item text-light" asp-controller="Account" asp-action="AlterarSenha" classes-if-active="disabled">
+            Alterar Senha
+            </a>
+            </li> *@
+                <li>
+                    <hr class="dropdown-divider text-light">
+                </li>
+                <li>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <input type="submit" value="Sair" class="btn btn-outline-danger" />
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </form>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-left">
+        <a class="nav-link text-dark" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@string.Format("{0}{1}", Context.Request.Path, Context.Request.QueryString)" style="color:white">&nbsp; Log in&nbsp;</a>
+        <a class="nav-link text-dark" asp-controller="Account" asp-action="Register" style="color:white">&nbsp;Registro&nbsp;&nbsp;&nbsp;</a>
+    </ul>
+}

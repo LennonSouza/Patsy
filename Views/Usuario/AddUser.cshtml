@@ -1,0 +1,53 @@
+﻿@model Patsy.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "Adicionar Usuário";
+}
+
+<h1>Adicionar Usuário</h1>
+
+<form asp-action="AddUser" method="post">
+    <div class="form-group">
+        <label asp-for="UserName"></label>
+        <input asp-for="UserName" class="form-control" required />
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" required />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="Password">Senha</label>
+        <input type="password" name="password" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Sector"></label>
+        <input asp-for="Sector" class="form-control" required />
+        <span asp-validation-for="Sector" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Funções</label>
+        <select multiple class="form-control" name="roles">
+            @foreach (var role in ViewBag.Roles)
+            {
+                <option value="@role.Name">@role.Name</option>
+            }
+        </select>
+        <small class="form-text text-muted">Segure Ctrl (ou Cmd no Mac) para selecionar múltiplas funções.</small>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Adicionar Usuário</button>
+</form>
+
+<a asp-action="Usuarios" class="btn btn-secondary">Voltar</a>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Adicionar Função";
+}
+
+<h1>Adicionar Função</h1>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label for="roleName">Nome da Função</label>
+        <input type="text" class="form-control" name="roleName" required />
+        <label for="roleName">Nivel Competencia</label>
+        <input type="text" class="form-control" name="hierarchyLevel" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Adicionar</button>
+</form>
+
+<a asp-action="Index" class="btn btn-secondary">Voltar</a>

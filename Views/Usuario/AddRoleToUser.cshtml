@@ -1,0 +1,24 @@
+﻿@model Patsy.ViewModels.AddRoleToUserViewModel
+
+@{
+    ViewData["Title"] = "Adicionar Role ao Usuário";
+}
+
+<h1>Adicionar Role ao Usuário</h1>
+
+<form asp-action="AddRoleToUser" method="post">
+    <input type="hidden" name="id" value="@Model.UserId" />
+    
+    <div class="mb-3">
+        <label for="role" class="form-label">Selecione a Role:</label>
+        <select id="role" name="role" class="form-select" required>
+            @foreach (var availableRole in Model.AvailableRoles)
+            {
+                <option value="@availableRole">@availableRole</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Adicionar Role</button>
+    <a asp-action="Usuarios" class="btn btn-secondary">Cancelar</a>
+</form>

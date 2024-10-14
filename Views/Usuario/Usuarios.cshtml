@@ -1,0 +1,39 @@
+﻿@model List<Patsy.ViewModels.UserWithRolesViewModel>
+
+@{
+    ViewData["Title"] = "Usuários";
+}
+
+<!-- Adicione o link do Bootstrap CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet" />
+
+<h1 class="text-center my-4">Usuários</h1>
+
+<div class="container">
+    <table class="table table-striped table-bordered">
+        <a asp-action="AddUser" class="btn btn-primary">Adicionar Usuário</a>
+        <thead class="table-light">
+            <tr>
+                <th>Nome de Usuário</th>
+                <th>Email</th>
+                <th>Permissões</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>@string.Join(", ", user.Roles)</td>
+                    <td>
+                        <a asp-action="UpdateUser" asp-route-id="@user.Id" class="btn btn-warning btn-sm">Editar</a> |
+                        <a asp-action="DeleteUser" asp-route-id="@user.Id" class="btn btn-danger btn-sm">Excluir</a>
+                        @* <a asp-action="AddRoleToUser" asp-route-id="@user.Id" class="btn btn-primary btn-sm">Adicionar Função</a> *@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
